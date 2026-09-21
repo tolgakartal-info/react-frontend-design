@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PageHeader from '../components/PageHeader';
 
-export default function MessagesPage(screenSize) {
+export default function MessagesPage({screenSize}) {
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -308,7 +308,7 @@ export default function MessagesPage(screenSize) {
                           {/* İsim Soyisim */}
                           <div 
                             className={`fw-bold mb-1 ${textAlignClass} ${nameColor}`}
-                            style={{ fontSize: screenSize }}
+                            style={{ fontSize:screenSize }}
                           >
                             {chat.senderName}
                           </div>

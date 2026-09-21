@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsCollapsed,setScreenSize }) {
+export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsCollapsed,screenSize,setScreenSize }) {
     // Sayfa ilk açıldığında localStorage'a bak, yoksa varsayılan 'dark' yap
     const [currentTheme, setCurrentTheme] = useState(() => {
         return localStorage.getItem('app_theme') || 'dark';
@@ -232,12 +232,12 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                     </div>
                 ) : (
                     <div className="d-flex flex-column gap-3 flex-grow-1 overflow-auto" style={{ fontSize: '13px' }}>
-                        <div className="d-flex gap-1 bg-secondary bg-opacity-10 p-1 rounded border border-secondary border-opacity-25" role="group">
+                        <div className="d-flex gap-1 bg-secondary bg-opacity-10 p-1 rounded border border-secondary border-opacity-25 flex-wrap" role="group">
                             <button
                                 type="button"
                                 className={`btn btn-sm flex-fill ${activeTab === 'notifications' ? 'btn-primary' : 'btn-link text-decoration-none custom-text-main'}`}
                                 onClick={() => setActiveTab('notifications')}
-                                style={{ fontSize: '11px' }}
+                                style={{ fontSize: '10px' }}
                             >
                                 Bildirim
                             </button>
@@ -245,7 +245,7 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 type="button"
                                 className={`btn btn-sm flex-fill ${activeTab === 'tasks' ? 'btn-primary' : 'btn-link text-decoration-none custom-text-main'}`}
                                 onClick={() => setActiveTab('tasks')}
-                                style={{ fontSize: '11px' }}
+                                style={{ fontSize: '10px' }}
                             >
                                 Görev
                             </button>
@@ -253,7 +253,7 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 type="button"
                                 className={`btn btn-sm flex-fill ${activeTab === 'add' ? 'btn-primary' : 'btn-link text-decoration-none custom-text-main'}`}
                                 onClick={() => setActiveTab('add')}
-                                style={{ fontSize: '11px' }}
+                                style={{ fontSize: '10px' }}
                             >
                                 + Yeni
                             </button>
@@ -360,21 +360,21 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 <button
                                     type="button"
                                     onClick={() => setScreenSize('small')}
-                                    className={`btn btn-sm ${setScreenSize === 'small' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
+                                    className={`btn btn-sm ${screenSize === 'small' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
                                 >
                                     Küçük
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setScreenSize('normal')}
-                                    className={`btn btn-sm ${setScreenSize === 'normal' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
+                                    className={`btn btn-sm ${screenSize === 'normal' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
                                 >
                                     Normal
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setScreenSize('large')}
-                                    className={`btn btn-sm ${setScreenSize === 'large' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
+                                    className={`btn btn-sm ${screenSize === 'large' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
                                 >
                                     Büyük
                                 </button>
@@ -494,21 +494,21 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 <button
                                     type="button"
                                     onClick={() => setScreenSize('small')}
-                                    className={`btn btn-sm ${setScreenSize === 'small' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
+                                    className={`btn btn-sm ${screenSize === 'small' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
                                 >
                                     Küçük
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setScreenSize('medium')}
-                                    className={`btn btn-sm ${setScreenSize === 'normal' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
+                                    className={`btn btn-sm ${screenSize === 'normal' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
                                 >
                                     Normal
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setScreenSize('large')}
-                                    className={`btn btn-sm ${setScreenSize === 'large' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
+                                    className={`btn btn-sm ${screenSize === 'large' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
                                 >
                                     Büyük
                                 </button>

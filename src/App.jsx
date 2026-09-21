@@ -17,7 +17,7 @@ export default function App() {
   const [path, setPath] = useState(window.location.pathname);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [screenSize,setScreenSize] = useState('medium')
+  const [screenSize, setScreenSize] = useState('medium')
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isRightCollapsed, setIsRightCollapsed] = useState(true); // Web'de ilk açılışta kapalı (daraltılmış)
   const [isRightOpen, setIsRightOpen] = useState(false); // Mobilde alt tab penceresi durumu
@@ -75,7 +75,8 @@ export default function App() {
       case '/projects': return <ProjectPage />;
       case '/devices': return <DevicePage />;
       case '/profile': return <ProfilePage />;
-      case '/messages': return <MessagesPage screenSize={getRootFontSize} />;
+      case '/messages': return <MessagesPage
+        screenSize={ getRootFontSize(screenSize)} />;
       default: return <NotFoundPage navigate={navigate} />;
     }
   };
@@ -117,6 +118,7 @@ export default function App() {
         setIsOpen={setIsRightOpen}
         theme={currentTheme}
         setScreenSize={setScreenSize}
+        screenSize={screenSize}
       />
     </div>
   );
