@@ -228,7 +228,7 @@ export default function MessagesPage({screenSize}) {
           </div>
 
           {/* Sağ Kolon: Balonlu Sohbet Alanı */}
-          <div className="col-12 col-md-7 col-lg-8 d-flex flex-column" style={{ height: '600px' }}>
+          <div className="col-12 col-md-7 col-lg-8 d-flex flex-column" style={{ height: '500px' }}>
             {selectedMessage ? (
               <>
                 {/* Sohbet Başlığı */}
@@ -242,7 +242,9 @@ export default function MessagesPage({screenSize}) {
                     </div>
                     <div>
                       <h6 className="fw-bold text-dark mb-0">{selectedMessage.sender}</h6>
-                      <small className="text-muted">{selectedMessage.title}</small>
+                      <small className="text-muted"
+                      style={{fontSize:screenSize}}
+                      >{selectedMessage.title}</small>
                     </div>
                   </div>
                 </div>

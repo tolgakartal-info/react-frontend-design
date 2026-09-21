@@ -261,7 +261,7 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 type="button"
                                 className={`btn btn-sm flex-fill ${activeTab === 'theme' ? 'btn-primary' : 'btn-link text-decoration-none custom-text-main'}`}
                                 onClick={() => setActiveTab('theme')}
-                                style={{ fontSize: '11px' }}
+                                style={{ fontSize: '10px' }}
                             >
                                 Tema
                             </button>

@@ -104,7 +104,7 @@ export default function App() {
       <div className="d-flex flex-column flex-grow-1 min-vw-0">
         <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-        <main className="p-4 flex-grow-1">
+        <main className="p-2 flex-grow-1">
           {renderPage()}
         </main>
         <Footer />
