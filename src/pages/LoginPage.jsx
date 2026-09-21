@@ -15,6 +15,7 @@ export default function LoginPage({ isDark, screenSize, onLoginSubmit }) {
     };
 
     const handleSubmit = (e) => {
+        // burda apiden token alınacak
         e.preventDefault();
         setLoading(true);
         
@@ -26,7 +27,7 @@ export default function LoginPage({ isDark, screenSize, onLoginSubmit }) {
             }
         }, 1000);
     };
-
+    
     return (
         <div className={`d-flex align-items-center justify-content-center min-vh-100 ${isDark ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
             <div 
@@ -40,8 +41,9 @@ export default function LoginPage({ isDark, screenSize, onLoginSubmit }) {
             >
                 <div className="card-body p-4">
                     <div className="text-center mb-4">
-                        <div className="fs-1 mb-2">🚀</div>
-                        <h2 className="fw-bold fs-3">Hoş Geldiniz</h2>
+                        <div className="fs-1 mb-2">📐</div>
+                        <h2>T-Projects Solutions</h2>
+                        <h3 className="fw-bold fs-3">Hoş Geldiniz</h3>
                         <p className={`text-muted small ${isDark ? 'text-secondary' : ''}`}>
                             Devam etmek için lütfen giriş yapın.
                         </p>
