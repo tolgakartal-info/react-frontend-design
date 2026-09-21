@@ -5,6 +5,7 @@ import RightSidebar from './components/RightSideBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import CompaniesPage from './pages/CompanyPage';
 import ProjectPage from './pages/ProjectPage';
@@ -14,6 +15,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import MessagesPage from './pages/MessagesPage';
 
 export default function App() {
+  const [user, setUser] = useState(null);
   const [path, setPath] = useState(window.location.pathname);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -81,45 +83,74 @@ export default function App() {
     }
   };
 
-  return (
-    // En dış kapsayıcı: Yan yana esnek yerleşim
-    <div className="min-vh-100 bg-light d-flex w-100 overflow-x-hidden"
-      style={{
-        backgroundColor: isDark ? '#121212' : '#ffffff',
-        color: isDark ? '#f8f9fa' : '#212529',
-        transition: 'background-color 0.3s ease, color 0.3s ease'
-      }}>
+  // Başarılı giriş simülasyonu
+  const handleLoginSubmit = (credentials) => {
+    // Burada normalde API'ye istek atarsınız
+    setUser({
+      name: 'Ahmet Yılmaz',
+      role: 'Yönetici',
+      email: credentials.email
+    });
+  };
 
-      {/* 1. Sol Sidebar (Akışın resmi parçası) */}
-      <SideBar
-        currentPath={path}
-        navigate={navigate}
-        isOpen={isSidebarOpen}
-        setIsOpen={setIsSidebarOpen}
-        isCollapsed={isSidebarCollapsed}
-        setIsCollapsed={setIsSidebarCollapsed}
-      />
+  // Çıkış yapma fonksiyonu
+  const handleLogout = () => {
+    setUser(null);
+  };
 
-      {/* 2. Sağ Taraf: Kalan tüm genişliği otomatik doldurur */}
-      <div className="d-flex flex-column flex-grow-1 min-vw-0">
-        <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-
-        <main className="p-2 flex-grow-1">
-          {renderPage()}
-        </main>
-        <Footer />
-      </div>
-
-      {/* Sağ Sidebar / Mobil Alt Tab */}
-      <RightSidebar
-        isCollapsed={isRightCollapsed}
-        setIsCollapsed={setIsRightCollapsed}
-        isOpen={isRightOpen}
-        setIsOpen={setIsRightOpen}
-        theme={currentTheme}
-        setScreenSize={setScreenSize}
+  if (!user) {
+    return (
+      <LoginPage
+        isDark={isDark}
         screenSize={screenSize}
+        onLoginSubmit={handleLoginSubmit}
       />
-    </div>
-  );
+    );
+  }
+  else
+    return (
+      // En dış kapsayıcı: Yan yana esnek yerleşim
+      <div className="min-vh-100 bg-light d-flex w-100 overflow-x-hidden"
+        style={{
+          backgroundColor: isDark ? '#121212' : '#ffffff',
+          color: isDark ? '#f8f9fa' : '#212529',
+          transition: 'background-color 0.3s ease, color 0.3s ease'
+        }}>
+
+        {/* 1. Sol Sidebar (Akışın resmi parçası) */}
+      <SideBar
+          currentPath={path}
+          navigate={navigate}
+          isOpen={isSidebarOpen}
+          setIsOpen={setIsSidebarOpen}
+          isCollapsed={isSidebarCollapsed}
+          setIsCollapsed={setIsSidebarCollapsed}
+        />
+
+        {/* 2. Sağ Taraf: Kalan tüm genişliği otomatik doldurur */}
+        <div className="d-flex flex-column flex-grow-1 min-vw-0">
+          {/*<Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />*/}
+
+          <Header
+            toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+            user={user}
+            onLogout={handleLogout} />
+          <main className="p-2 flex-grow-1">
+            {renderPage()}
+          </main>
+          <Footer />
+        </div>
+
+        {/* Sağ Sidebar / Mobil Alt Tab */}
+        <RightSidebar
+          isCollapsed={isRightCollapsed}
+          setIsCollapsed={setIsRightCollapsed}
+          isOpen={isRightOpen}
+          setIsOpen={setIsRightOpen}
+          theme={currentTheme}
+          setScreenSize={setScreenSize}
+          screenSize={screenSize}
+        />
+      </div>
+    );
 }

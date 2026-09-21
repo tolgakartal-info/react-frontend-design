@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({ toggleSidebar, user = { name: 'Ahmet Yılmaz', role: 'Yönetici' } }) {
+export default function Header({ toggleSidebar, user, onLogout }) {
   return (
     <header className="navbar navbar-expand bg-white border-bottom px-3 py-2 sticky-top">
       <div className="container-fluid p-0 d-flex align-items-center justify-content-between">
@@ -49,11 +49,11 @@ export default function Header({ toggleSidebar, user = { name: 'Ahmet Yılmaz', 
               </span>
             </button>
             <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="messagesDropdown">
-              <li><h6 className="dropdown-header">Mesajlar (3 Unread)</h6></li>
+              <li><h6 className="dropdown-header">Mesajlar (3 Okunmamış)</h6></li>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-link dropdown-item small" href="#msg1">📩 Yeni proje güncellendi</a></li>
-              <li><a className="dropdown-link dropdown-item small" href="#msg2">💬 Mehmet: Evraklar tamamlandı</a></li>
-              <li><a className="dropdown-link dropdown-item small" href="#msg3">⚙️ Sistem bildirimi</a></li>
+              <li><a className="dropdown-item small" href="#msg1">📩 Yeni proje güncellendi</a></li>
+              <li><a className="dropdown-item small" href="#msg2">💬 Mehmet: Evraklar tamamlandı</a></li>
+              <li><a className="dropdown-item small" href="#msg3">⚙️ Sistem bildirimi</a></li>
             </ul>
           </div>
 
@@ -73,15 +73,20 @@ export default function Header({ toggleSidebar, user = { name: 'Ahmet Yılmaz', 
                 {user.name.charAt(0)}
               </div>
               <div className="text-start d-none d-sm-block">
-                <div className="fw-semibold lh-1 fs-6">{user.name}</div>
-                <small className="text-muted" style={{ fontSize: '11px' }}>{user.role}</small>
+                <div className="fw-semibold lh-1 fs-6">{user?.name || 'Kullanıcı'}</div>
+                <small className="text-muted" style={{ fontSize: '11px' }}>{user?.role || 'Misafir'}</small>
               </div>
             </button>
             <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userMenu">
               <li><a className="dropdown-item" href="#profile">👤 Profilim</a></li>
               <li><a className="dropdown-item" href="#settings">⚙️ Ayarlar</a></li>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item text-danger" href="#logout">🚪 Çıkış Yap</a></li>
+              {/* Çıkış Yap Butonu */}
+              <li>
+                <button className="dropdown-item text-danger" onClick={onLogout}>
+                  🚪 Çıkış Yap
+                </button>
+              </li>
             </ul>
           </div>
         </div>
