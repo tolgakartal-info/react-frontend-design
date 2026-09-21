@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) {
+export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsCollapsed,setScreenSize }) {
     // Sayfa ilk açıldığında localStorage'a bak, yoksa varsayılan 'dark' yap
     const [currentTheme, setCurrentTheme] = useState(() => {
         return localStorage.getItem('app_theme') || 'dark';
@@ -217,6 +217,18 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                             </button>
                             <div className="right-sidebar-tooltip">Tema Ayarları</div>
                         </div>
+
+                        <div className="right-sidebar-item-container w-100 d-flex justify-content-center">
+                            <button
+                                onClick={() => { setIsCollapsed(false); setActiveTab('sizing'); }}
+                                className={`btn custom-item-bg custom-text-main rounded-circle d-flex align-items-center justify-content-center p-0 shadow-sm border`}
+                                style={{ width: '40px', height: '40px', fontSize: '18px' }}
+                                type="button"
+                            >
+                                🔠
+                            </button>
+                            <div className="right-sidebar-tooltip">Boyutlandırma</div>
+                        </div>
                     </div>
                 ) : (
                     <div className="d-flex flex-column gap-3 flex-grow-1 overflow-auto" style={{ fontSize: '13px' }}>
@@ -252,6 +264,14 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 style={{ fontSize: '11px' }}
                             >
                                 Tema
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn btn-sm flex-fill ${activeTab === 'sizing' ? 'btn-primary' : 'btn-link text-decoration-none custom-text-main'}`}
+                                onClick={() => setActiveTab('sizing')}
+                                style={{ fontSize: '10px' }}
+                            >
+                                Boyut
                             </button>
                         </div>
 
@@ -332,6 +352,34 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 </button>
                             </div>
                         )}
+
+                        {activeTab === 'sizing' && (
+                            <div className="d-flex flex-column gap-2">
+                                <span className="custom-text-muted text-uppercase fw-bold" style={{ fontSize: '10px' }}>Boyutlandırma</span>
+                                
+                                <button
+                                    type="button"
+                                    onClick={() => setScreenSize('small')}
+                                    className={`btn btn-sm ${setScreenSize === 'small' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
+                                >
+                                    Küçük
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setScreenSize('normal')}
+                                    className={`btn btn-sm ${setScreenSize === 'normal' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
+                                >
+                                    Normal
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setScreenSize('large')}
+                                    className={`btn btn-sm ${setScreenSize === 'large' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start`}
+                                >
+                                    Büyük
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
             </aside>
@@ -357,6 +405,7 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 {activeTab === 'tasks' && '⏰ Zamanlanmış Görevler'}
                                 {activeTab === 'add' && '➕ Yeni Ekle'}
                                 {activeTab === 'theme' && '🎨 Tema Ayarları'}
+                                {activeTab === 'sizing' && '🔠 Boyutlandırma'}
                             </h6>
                             <button
                                 onClick={() => setIsOpen(false)}
@@ -439,6 +488,32 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                                 </button>
                             </div>
                         )}
+
+                        {activeTab === 'sizing' && (
+                            <div className="d-flex flex-column gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => setScreenSize('small')}
+                                    className={`btn btn-sm ${setScreenSize === 'small' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
+                                >
+                                    Küçük
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setScreenSize('medium')}
+                                    className={`btn btn-sm ${setScreenSize === 'normal' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
+                                >
+                                    Normal
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setScreenSize('large')}
+                                    className={`btn btn-sm ${setScreenSize === 'large' ? 'btn-primary' : (isDark ? 'btn-outline-light border-secondary' : 'btn-outline-dark border-secondary-subtle')} text-start py-2`}
+                                >
+                                    Büyük
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
 
@@ -478,6 +553,15 @@ export default function RightSidebar({ isOpen, setIsOpen, isCollapsed, setIsColl
                     >
                         <span className="fs-5">🎨</span>
                         <span style={{ fontSize: '10px' }}>Tema</span>
+                    </button>
+                    <button
+                        onClick={() => handleMobileTabClick('sizing')}
+                        className={`btn custom-text-main d-flex flex-column align-items-center p-0 border-0 bg-transparent`}
+                        style={{ fontSize: '11px' }}
+                        type="button"
+                    >
+                        <span className="fs-5">🔠</span>
+                        <span style={{ fontSize: '10px' }}>Boyut</span>
                     </button>
                 </div>
             </div>

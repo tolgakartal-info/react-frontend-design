@@ -17,6 +17,7 @@ export default function App() {
   const [path, setPath] = useState(window.location.pathname);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [screenSize,setScreenSize] = useState('medium')
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isRightCollapsed, setIsRightCollapsed] = useState(true); // Web'de ilk açılışta kapalı (daraltılmış)
   const [isRightOpen, setIsRightOpen] = useState(false); // Mobilde alt tab penceresi durumu
@@ -57,6 +58,16 @@ export default function App() {
     setPath(toPath);
   };
 
+  // Boyuta göre kök font boyutunu değiştirebiliriz
+  const getRootFontSize = () => {
+    switch (screenSize) {
+      case 'small': return '10px';
+      case 'medium': return "12px"
+      case 'large': return '14px';
+      default: return '12px'; // normal
+    }
+  };
+
   const renderPage = () => {
     switch (path) {
       case '/': return <DashboardPage navigate={navigate} />;
@@ -64,16 +75,16 @@ export default function App() {
       case '/projects': return <ProjectPage />;
       case '/devices': return <DevicePage />;
       case '/profile': return <ProfilePage />;
-      case '/messages': return <MessagesPage />;
+      case '/messages': return <MessagesPage screenSize={getRootFontSize} />;
       default: return <NotFoundPage navigate={navigate} />;
     }
   };
 
-  return (  
+  return (
     // En dış kapsayıcı: Yan yana esnek yerleşim
     <div className="min-vh-100 bg-light d-flex w-100 overflow-x-hidden"
-      style={{ 
-        backgroundColor: isDark ? '#121212' : '#ffffff', 
+      style={{
+        backgroundColor: isDark ? '#121212' : '#ffffff',
         color: isDark ? '#f8f9fa' : '#212529',
         transition: 'background-color 0.3s ease, color 0.3s ease'
       }}>
@@ -105,6 +116,7 @@ export default function App() {
         isOpen={isRightOpen}
         setIsOpen={setIsRightOpen}
         theme={currentTheme}
+        setScreenSize={setScreenSize}
       />
     </div>
   );

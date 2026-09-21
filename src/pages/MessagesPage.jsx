@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PageHeader from '../components/PageHeader';
 
-export default function MessagesPage() {
+export default function MessagesPage(screenSize) {
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -208,11 +208,11 @@ export default function MessagesPage() {
                           <h6 className={`mb-0 text-truncate ${msg.unread ? 'fw-bold text-dark' : 'text-secondary'}`}>
                             {msg.sender}
                           </h6>
-                          <small className="text-muted ms-2 flex-shrink-0" style={{ fontSize: '11px' }}>
+                          <small className="text-muted ms-2 flex-shrink-0" style={{ fontSize: screenSize }}>
                             {msg.time}
                           </small>
                         </div>
-                        <p className="text-muted small mb-0 text-truncate" style={{ fontSize: '12px' }}>
+                        <p className="text-muted small mb-0 text-truncate" style={{ fontSize: screenSize }}>
                           {msg.preview}
                         </p>
                       </div>
@@ -257,13 +257,13 @@ export default function MessagesPage() {
                   {/* Eski Mesaj Yükleme Bilgilendirmesi */}
                   {visibleCount < totalHistoryCount ? (
                     <div className="text-center my-1">
-                      <span className="badge bg-secondary opacity-75 fw-normal py-1 px-3" style={{ fontSize: '11px' }}>
+                      <span className="badge bg-secondary opacity-75 fw-normal py-1 px-3" style={{ fontSize: screenSize }}>
                         ▲ Daha eski mesajlar için yukarı kaydırın ({totalHistoryCount - visibleCount} mesaj daha var)
                       </span>
                     </div>
                   ) : totalHistoryCount > 10 ? (
                     <div className="text-center my-1">
-                      <span className="badge bg-light text-muted border fw-normal py-1 px-3" style={{ fontSize: '11px' }}>
+                      <span className="badge bg-light text-muted border fw-normal py-1 px-3" style={{ fontSize: screenSize }}>
                         Sohbetin başlangıcı
                       </span>
                     </div>
@@ -287,7 +287,8 @@ export default function MessagesPage() {
                             color: '#111b21',
                             maxWidth: '75%', 
                             minWidth: '220px',
-                            borderRadius: chat.isMe ? '12px 0px 12px 12px' : '0px 12px 12px 12px'
+                            borderRadius: chat.isMe ? '12px 0px 12px 12px' : '0px 12px 12px 12px',
+                            fontSize:screenSize,
                           }}
                         >
                           {/* Kulakçık Çıkıntısı */}
@@ -299,6 +300,7 @@ export default function MessagesPage() {
                               width: '0',
                               height: '0',
                               borderTop: `10px solid ${bubbleBg}`,
+                              fontSize:screenSize,
                               [chat.isMe ? 'borderRight' : 'borderLeft']: '8px solid transparent',
                             }}
                           />
@@ -306,7 +308,7 @@ export default function MessagesPage() {
                           {/* İsim Soyisim */}
                           <div 
                             className={`fw-bold mb-1 ${textAlignClass} ${nameColor}`}
-                            style={{ fontSize: '12px' }}
+                            style={{ fontSize: screenSize }}
                           >
                             {chat.senderName}
                           </div>
@@ -314,7 +316,7 @@ export default function MessagesPage() {
                           {/* Mesaj Metni */}
                           <div 
                             className={`mb-2 text-break ${textAlignClass}`} 
-                            style={{ fontSize: '14px', lineHeight: '1.4' }}
+                            style={{ fontSize:screenSize, lineHeight: '1.4' }}
                           >
                             {chat.text}
                           </div>
@@ -322,7 +324,7 @@ export default function MessagesPage() {
                           {/* Alt Zaman / Tarih */}
                           <div 
                             className="d-flex justify-content-between align-items-center text-muted"
-                            style={{ fontSize: '10px' }}
+                            style={{ fontSize: screenSize }}
                           >
                             <span>{chat.time}</span>
                             <span>{chat.date}</span>
